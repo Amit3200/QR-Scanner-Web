@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scan Krap</title>
+    <style>
+        body, .do{
+            background: url("BK1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color:white;
+            font-family: "QuickSand";
+            overflow: hidden;
+        }
+        #preview{
+            width: 350px;
+        }
+        .cont{
+                color:white;
+               font-family: "QuickSand";
+        }       
+    </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="instascan.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
+</head>
+<body>
+    <br>
+    <br>
+    <div class="cont">
+   <center> <video id="preview"></video>
+    <script type="text/javascript">
+        var glo=[];
+        function makeon(content){
+           // alert(content);
+          swal("Scan Done!", content, "success");  
+            glo.push(content);
+            document.getElementById("dota").innerHTML=glo;
+        }
+        let scanner = new Instascan.Scanner({
+            video: document.getElementById('preview')
+        });
+        scanner.addListener('scan', function(content) {
+            console.log(content);
+           // alert(content);
+            makeon(content);
+        });
+        Instascan.Camera.getCameras().then(function(cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function(e) {
+            console.error(e);
+        });
+       </script></center><center>
+        <h1>QR KRAP SCAN</h1>
+        <h4>Smart Labs and Smart Solutions</h4></center>
+    </div>
+    <center><div>Previously Scanned Stuffs : <span id="dota"></span></div></center>
+    <div style="margin-top: 170px;" class="do">
+        <p align="center">Developed by Amit Singh Sansoya</p>
+        <p align="center">This simple web application uses Instascan.js to decode the QR code. There are various ways in which this can be used and the concept is being used by us to provide some help to people</p>
+    </div>
+</body>
+</html>
